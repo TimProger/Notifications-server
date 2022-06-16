@@ -1,4 +1,4 @@
-const Product = require("../models/product.model");
+const Product = require("../models/message.model");
 const { StatusCodes } = require("http-status-codes");
 
 const addProduct = async (req, res) => {
