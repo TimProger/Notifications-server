@@ -7,12 +7,16 @@ const cors = require("cors");
 const xss = require("xss-clean");
 const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 
 const router = require("./routes/router");
 const PORT = process.env.PORT || 8080;
 const dbUri = process.env.dbURI;
 
 const app = express();
+
+const httpServer = createServer(app)
 
 app.use(
     rateLimiter({
@@ -51,14 +55,30 @@ app.get("/", (req, res) => {
     res.send("Hello Server");
 });
 
+const io = new Server(httpServer, {
+    cors: {
+        origin: "*"
+    }
+});
+
+io.on('connection', socket => {
+    console.log('User connected');
+
+    socket.on('message', message => {
+        console.log('client: ', message)
+        io.emit('message', message)
+    })
+})
+
 app.use("/api/v1/", router);
 
-app.listen(PORT, async () => {
+httpServer.listen(PORT, async () => {
     console.log(`Server running at http://localhost:${PORT}`);
     try {
         await mongoose.connect(dbUri);
         console.log("DB connected");
     } catch (error) {
+        console.log(error)
         console.log("Could not connect to DB");
         process.exit(1);
     }
