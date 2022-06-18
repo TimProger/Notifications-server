@@ -9,6 +9,7 @@ const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
+const MessageModel = require("./models/message.model");
 
 const router = require("./routes/router");
 const PORT = process.env.PORT || 8080;
@@ -64,7 +65,8 @@ const io = new Server(httpServer, {
 io.on('connection', socket => {
     console.log('User connected');
 
-    socket.on('message', message => {
+    socket.on('message', async message => {
+        newProduct = await MessageModel.create(message);
         console.log('client: ', message)
         io.emit('message', message)
     })
