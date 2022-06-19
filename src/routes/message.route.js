@@ -1,18 +1,18 @@
 const express = require("express");
 const {
-    addProduct,
-    removeProduct,
-    getProducts,
-    getOneProduct,
+    addMessage,
+    removeMessage,
+    getOneMessage,
+    getMessage,
 } = require("../controllers/message.controller");
 const router = express.Router();
 
-router.post("/add", addProduct);
-router.get("/getOne", getOneProduct);
-router.get("/remove", removeProduct);
-router.get("/get", getProducts);
+router.post("/add", addMessage);
+router.get("/getOne", getOneMessage);
+router.get("/remove", removeMessage);
+router.get("/get", getMessage);
 router.get("/test", (req, res) => {
-    res.send("product route test success");
+    res.send("notifications route test success");
 });
 
 module.exports = router;

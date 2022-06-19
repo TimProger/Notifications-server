@@ -4,6 +4,6 @@ const adminRouter = require("./admin.route");
 const messageRouter = require("./message.route");
 
 router.use("/admin", adminRouter);
-router.use("/message", messageRouter);
+router.use("/notifications", messageRouter);
 
 module.exports = router;
