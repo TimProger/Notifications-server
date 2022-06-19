@@ -67,8 +67,13 @@ io.on('connection', socket => {
 
     socket.on('message', async message => {
         newProduct = await MessageModel.create(message);
-        console.log('client: ', message)
+        console.log('client add: ', message)
         io.emit('message', message)
+    })
+
+    socket.on('remove', async id => {
+        console.log('client rm: ', id)
+        io.emit('remove', id)
     })
 })
 
