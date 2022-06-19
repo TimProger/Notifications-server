@@ -66,9 +66,9 @@ io.on('connection', socket => {
     console.log('User connected');
 
     socket.on('message', async message => {
-        newProduct = await MessageModel.create(message);
         console.log('client add: ', message)
-        io.emit('message', message)
+        newMessage = await MessageModel.create(message);
+        io.emit('message', newMessage)
     })
 
     socket.on('remove', async id => {
