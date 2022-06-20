@@ -75,6 +75,10 @@ io.on('connection', socket => {
         console.log('client rm: ', id)
         io.emit('remove', id)
     })
+
+    socket.on('pong', async pong => {
+        // console.log(`pong! UUID: ${pong.id}`)
+    })
 })
 
 app.use("/api/v1/", router);
