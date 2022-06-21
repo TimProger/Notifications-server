@@ -67,7 +67,12 @@ io.on('connection', socket => {
 
     socket.on('message', async message => {
         console.log('client add: ', message)
-        newMessage = await MessageModel.create(message);
+        let date = new Date();
+        hour = date.getHours();
+        minutes = date.getMinutes();
+        seconds = date.getSeconds();
+        let time = `${hour}:${minutes}:${seconds}`
+        newMessage = await MessageModel.create({...message, time, type: 'message'});
         io.emit('message', newMessage)
     })
 

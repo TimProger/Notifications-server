@@ -1,14 +1,22 @@
 const mongoose = require("mongoose");
 
 const MessageSchema = new mongoose.Schema({
+    type: {
+        type: String,
+        default: 'message'
+    },
     name: {
         type: String,
-        required: [true, "Пожалуйста, введите название"],
+        required: [true, "Имя отсутствует"],
     },
     message: {
         type: String,
-        required: [true, "Пожалуйста, введите описание"],
+        required: [true, "Сообщение отсутствует"],
     },
+    time: {
+        type: String,
+        required: [true, "Дата отсутствует"]
+    }
 });
 
 module.exports = mongoose.model("Message", MessageSchema);
