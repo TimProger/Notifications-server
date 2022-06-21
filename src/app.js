@@ -45,6 +45,7 @@ app.use(
     cors({
         origin: [
             "http://localhost:3000",
+            "https://timprof-chat-client.herokuapp.com/"
         ],
         methods: ["GET", "POST"],
         optionsSuccessStatus: 200,
